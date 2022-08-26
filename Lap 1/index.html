@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sum() {
+            var a = document.getElementById('numA').value;
+            var b = document.getElementById('numB').value;
+            alert(Number(a) + Number(b));
+
+
+        }
+    </script>
+</head>
+<table>
+    <tr>
+        <th id="newA"> </th>
+        <th id="inA"> </th>
+    </tr>
+    <tr>
+        <th id="newB"> </th>
+        <th id="inB"> </th>
+    </tr>
+    <tr>
+        <th id="submit"> </th>
+
+    </tr>
+
+
+</table>
+
+<body>
+    <script>
+        const a = document.createElement("p");
+        const inA = document.createElement("input");
+        a.innerHTML = "a";
+        inA.setAttribute('id', 'numA');
+        document.getElementById('newA').appendChild(a);
+        document.getElementById('inA').appendChild(inA);
+
+        const b = document.createElement('p');
+        const inB = document.createElement('input');
+        inB.setAttribute('id', 'numB');
+        b.innerHTML = 'b';
+        document.getElementById('newB').appendChild(b);
+        document.getElementById('inB').appendChild(inB);
+
+        const btn = document.createElement('button');
+        btn.setAttribute('id', 'sumAB');
+        btn.innerHTML = 'sum';
+        btn.addEventListener('click', sum);
+        document.getElementById('submit').appendChild(btn);
+    </script>
+
+</body>
+
+</html>
