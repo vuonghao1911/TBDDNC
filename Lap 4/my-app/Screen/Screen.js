@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { useState, useEffect } from "react";
 import {
   StyleSheet,
   TextInput,
@@ -17,6 +18,25 @@ import buttonminus from "../img/btnminus.png";
 import buttonadd from "../img/btnadd.png";
 
 export default function Screen03() {
+  const [price, setPrice] = useState(140000);
+  const [amount, setAmount] = useState(1);
+  function addBook() {
+    setAmount(amount + 1);
+
+    console.log("so luong" + amount);
+    setPrice(140000 * (amount + 1));
+  }
+  function minusBook() {
+    if (amount <= 0) {
+      setAmount(0);
+      setPrice(140000 * amount);
+    } else {
+      setAmount(amount - 1);
+      console.log("so luong" + (amount - 1));
+      setPrice(140000 * (amount - 1));
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.viewUp}>
@@ -28,18 +48,18 @@ export default function Screen03() {
             <Text>Nguyên hàm tích phân và ứng dụng</Text>
             <Text>Cung cấp bởi Tiki Trading</Text>
             <Text style={{ fontSize: 25, color: "red", fontWeight: "bold" }}>
-              140.000
+              {price} d
             </Text>
             <Text style={{ fontSize: 20, color: "blue", fontWeight: "bold" }}>
               140.000
             </Text>
             <View style={styles.viewButton}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={minusBook}>
                 <Image source={buttonminus} />
               </TouchableOpacity>
 
-              <Text style={{ marginLeft: 0 }}>2</Text>
-              <TouchableOpacity>
+              <Text style={{ marginLeft: 0 }}>{amount}</Text>
+              <TouchableOpacity onPress={addBook}>
                 <Image source={buttonadd} />
               </TouchableOpacity>
 
@@ -74,7 +94,7 @@ export default function Screen03() {
       <View style={styles.viewMid}>
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>Tam Tinh</Text>
         <Text style={{ color: "red", fontWeight: "bold", fontSize: 20 }}>
-          140.000 d
+          {price} d
         </Text>
       </View>
       <View style={styles.viewBottom}>
@@ -83,7 +103,7 @@ export default function Screen03() {
             Thanh Tien
           </Text>
           <Text style={{ color: "red", fontWeight: "bold", fontSize: 20 }}>
-            140.000 d
+            {price} d
           </Text>
         </View>
         <Button title="Thanh Toan" color="red" />
