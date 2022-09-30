@@ -20,11 +20,12 @@ import buttonadd from "../img/btnadd.png";
 export default function Screen03() {
   const [price, setPrice] = useState(140000);
   const [amount, setAmount] = useState(1);
-  function addBook() {
+  function addBook(i) {
     setAmount(amount + 1);
 
     console.log("so luong" + amount);
     setPrice(140000 * (amount + 1));
+    console.log(i);
   }
   function minusBook() {
     if (amount <= 0) {
@@ -59,7 +60,7 @@ export default function Screen03() {
               </TouchableOpacity>
 
               <Text style={{ marginLeft: 0 }}>{amount}</Text>
-              <TouchableOpacity onPress={addBook}>
+              <TouchableOpacity key="add" onPress={addBook}>
                 <Image source={buttonadd} />
               </TouchableOpacity>
 
