@@ -8,9 +8,11 @@ import {
   Button,
 } from "react-native";
 import Items from "../Component/Items";
-
+import { Platform, NativeModules } from "react-native";
+const { StatusBarManager } = NativeModules;
 const HomeScreen = () => {
   const [item, setItem] = useState([{ title: "item1" }, { title: "item2" }]);
+  const [itemDetail, setItemDetail] = useState([]);
   const [title, setTitle] = useState("");
   const onPress = () => {
     var newArray = [...item, { title: title }];
@@ -29,10 +31,11 @@ const HomeScreen = () => {
   };
   const remove = (items) => {
     var array = [...item];
-
-    removeItem(array, items);
+    itemDetail.push(items);
+    // removeItem(array, items);
     console.log("data", items);
     console.log("array", array);
+    console.log("remove", itemDetail);
   };
 
   const renderItem = ({ item }) => (
@@ -74,7 +77,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 30,
+    marginTop: Platform.OS === "ios" ? 20 : StatusBarManager.HEIGHT,
     flexDirection: "column",
   },
   button: {
