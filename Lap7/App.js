@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-
+const axios = require("axios").default;
 import React, { Component, useEffect, useState } from "react";
 import {
   View,
@@ -36,10 +36,7 @@ export default function App() {
       img: "img 34 ",
       item: name,
     };
-    // var newArray = [...book, newItem];
 
-    // console.log(newArray);
-    //
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -73,6 +70,13 @@ export default function App() {
         removeItem(array, id);
         console.log("array", array);
         console.log("return", res);
+
+        // const index = book.map((object) => object.id).indexOf(res.id);
+        // if (index > -1) {
+        //   book.splice(index, 1);
+        // }
+        // setBook(book);
+        // console.log("index", index);
       })
       .catch((err) => {
         console.log(err);
@@ -87,17 +91,57 @@ export default function App() {
       let json = await response.json();
       setBook(json);
       console.log("data", json);
-      console.log("json", book);
+      // console.log("json", book);
     } catch (error) {
       console.error(error);
     }
   };
+  const testapi = async () => {
+    try {
+      const headers = {
+        Accept: "application/json, text/plain, /",
+        "Content-Type": "multipart/form-data",
+      };
+
+      const api = await axios
+        .get(
+          "https://192.168.134.124/messages/getMessageByType/635c2809a2b50dc0ae5352fa/IMAGE",
+
+          { headers }
+        )
+        .then((response) => {
+          return response.data;
+        });
+
+      console.log("api", api);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //http://192.168.134.124:5005/messages/getMessageByType/635c2809a2b50dc0ae5352fa/IMAGE
+
+  const testapifetch = async () => {
+    try {
+      const headers = { "Content-Type": "application/json" };
+      await fetch(
+        "https://13.228.206.211/conversation/6357fca23ac7316faee67e52?receiverId=C6LwvHCSBagEyr1QCneUgEaSuau1&page=1&size=4",
+        { headers }
+      )
+        .then((response) => response.json())
+        .then((data) => console.log("api fetch", data));
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  };
+
   const renderItem = ({ item }) => (
     <Items item={item} onPressRemove={() => deleteBook(item.id)} />
   );
 
   useEffect(() => {
     getBookData();
+    testapi();
+    testapifetch();
   }, []);
   return (
     <View style={styles.container}>
@@ -107,7 +151,7 @@ export default function App() {
           onChangeText={(text) => setName(text)}
           value={name}
         />
-        <TouchableOpacity style={styles.button} onPress={addItem}>
+        <TouchableOpacity style={styles.button} onPress={testapi}>
           <Text style={{ fontSize: 20, color: "#224863", fontWeight: "bold" }}>
             Add Item
           </Text>
