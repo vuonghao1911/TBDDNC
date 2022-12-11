@@ -1,15 +1,11 @@
 {
   "expo": {
-    "name": "chat-app",
-    "slug": "chat-app",
+    "name": "tom_and_jerry",
+    "slug": "tom_and_jerry",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "packagerOpts": {
-      "config": "metro.config.js",
-      "sourceExts": ["js", "jsx", "scss", "sass"]
-    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

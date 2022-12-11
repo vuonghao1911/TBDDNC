@@ -105,7 +105,7 @@ export default function App() {
 
       const api = await axios
         .get(
-          "https://192.168.134.124/messages/getMessageByType/635c2809a2b50dc0ae5352fa/IMAGE",
+          "http://192.168.134.124:5005/conversation/635c2809a2b50dc0ae5352fa?receiverId=dP2GR6FMv1fJG40SK9CXeZlbLCo2&page=1&size=20",
 
           { headers }
         )
